@@ -59,7 +59,7 @@ if __name__ == "__main__":
 
     args = parser.parse_args()
 
-    # todo: pull this into its own function
+    # TODO: pull this into its own function
     if args.current_week:
         # We want to look at the current week
         if current_date.weekday() == 0:
@@ -74,9 +74,16 @@ if __name__ == "__main__":
 
     # Load configurations from file TODO: Create intialization function if it doesn't exist
     home_dir = os.path.expanduser("~")
-    config_path = os.path.join(home_dir,"AppData","Local","jira_reports","jira_reports_config.toml")
+    config_path = os.path.join(home_dir,"AppData","Local","jira_reports","jira_reports_config.toml") # TODO: Make this more platform independent
     config = toml.load(config_path)
 
     # Grab creds from user
     username = getpass.getuser()
     password = getpass.getpass("Jira password: ")
+
+    jira_handle = JIRA(
+        options={"verify": False},
+        server=config['server']['base_uri'],
+        basic_auth=[username,password],
+        max_retries=1
+    )
