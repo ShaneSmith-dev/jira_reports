@@ -2,14 +2,15 @@
 Starting attempt at making python utility to create JIRA reports
 """
 
-import getpass
-import urllib3
-from jira import JIRA
-from collections import Counter
-import argparse
-import time
-import datetime
-from datetime import timedelta
+# TODO: Group these based on category? User input, etc.
+import getpass # Used to allow user to enter in password
+import urllib3 # Used to disable warning 
+from jira import JIRA # Python library to interface with JIRA REST api
+from collections import Counter # Used to count dictionary items 
+import argparse # Used to parse input arguments
+import time # Not sure if I need this one
+import datetime # Used to work with dates and times
+from datetime import timedelta # Used to adjust dates as needed
 
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning) # ignore warning about not doing certificate check
 
