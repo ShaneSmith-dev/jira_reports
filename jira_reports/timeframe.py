@@ -37,8 +37,16 @@ def report_dates(input_args):
     elif input_args.last_week:
         # We want to look at last week
         date_adj = timedelta(days=7)
-        beforeDate = current_date.isoformat()
-        afterDate = current_date.isoformat()
+        last_date = current_date - date_adj
+        if last_date.weekday() == 0:
+            afterDate = last_date.isoformat()
+        else:
+            date_adj = timedelta(days=last_date.weekday())
+            adj_date = last_date - date_adj
+            afterDate = adj_date.isoformat()
+        date_adj = timedelta(days=6-last_date.weekday())
+        adj_date = last_date + date_adj
+        beforeDate = adj_date.isoformat()
     elif input_args.current_month:
         # We want to look at the current month
         beforeDate = current_date.isoformat()
