@@ -16,6 +16,9 @@ Datetime Weekday Returns:
 6 = Sunday
 """
 
+start_of_year = datetime.date(2020,1,1)
+end_of_year = datetime.date(2020,12,31)
+
 def report_dates(input_args):
     # Grab current date
     current_date = datetime.date.today()
@@ -46,12 +49,12 @@ def report_dates(input_args):
         afterDate = current_date.isoformat()
     elif input_args.current_year:
         # We want to look at the current year
-        beforeDate = current_date.isoformat()
-        afterDate = current_date.isoformat()
+        beforeDate = end_of_year.replace(year=current_date.year).isoformat()
+        afterDate = start_of_year.replace(year=current_date.year).isoformat()
     elif input_args.last_year:
         # We want to look at last year
-        beforeDate = current_date.isoformat()
-        afterDate = current_date.isoformat()
+        beforeDate = end_of_year.replace(year=current_date.year-1).isoformat()
+        afterDate = start_of_year.replace(year=current_date.year-1).isoformat()
     else:
         beforeDate = current_date.isoformat()
         afterDate = current_date.isoformat()

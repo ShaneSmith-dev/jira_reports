@@ -67,12 +67,12 @@ if __name__ == "__main__":
     username = getpass.getuser()
     password = getpass.getpass("Jira password: ")
 
-    try:
-        jira_handle = JIRA(
-            options={"verify": False},
-            server=config['server']['base_uri'],
-            basic_auth=[username,password],
-            max_retries=1
-        )
-    except:
-        print("Jira connection unsuccessful.")
+    # try:
+    #     jira_handle = JIRA(
+    #         options={"verify": False},
+    #         server=config['server']['base_uri'],
+    #         basic_auth=[username,password],
+    #         max_retries=1
+    #     )
+    # except:
+    #     print("Jira connection unsuccessful.")
