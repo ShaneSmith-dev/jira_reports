@@ -4,6 +4,7 @@ Based on current time and report type returns start and end dates for report.
 
 import datetime # Used to work with dates and times
 from datetime import timedelta # Used to adjust dates as needed
+import calendar # Used to (easily) find the number of days in each month
 
 """
 Datetime Weekday Returns:
@@ -19,9 +20,11 @@ Datetime Weekday Returns:
 start_of_year = datetime.date(2020,1,1)
 end_of_year = datetime.date(2020,12,31)
 
-def report_dates(input_args):
+def report_dates(input_args): # TODO: Add unit tests for this
     # Grab current date
     current_date = datetime.date.today()
+    curr_year = current_date.year
+    curr_month = current_date.month
 
     if input_args.current_week:
         # We want to look at the current week
@@ -49,21 +52,22 @@ def report_dates(input_args):
         beforeDate = adj_date.isoformat()
     elif input_args.current_month:
         # We want to look at the current month
-        beforeDate = current_date.isoformat()
-        afterDate = current_date.isoformat()
+        beforeDate = current_date.replace(day=calendar.monthrange(curr_year,curr_month)[1]).isoformat()
+        afterDate = current_date.replace(day=1).isoformat()
     elif input_args.last_month:
-        # We want to look at last month
-        beforeDate = current_date.isoformat()
-        afterDate = current_date.isoformat()
+        # We want to look at last month TODO: Currently breaks in January (has to be in range 1-12)
+        beforeDate = current_date.replace(month=curr_month-1,day=calendar.monthrange(curr_year,curr_month-1)[1]).isoformat()
+        afterDate = current_date.replace(month=curr_month-1,day=1).isoformat()
     elif input_args.current_year:
         # We want to look at the current year
-        beforeDate = end_of_year.replace(year=current_date.year).isoformat()
-        afterDate = start_of_year.replace(year=current_date.year).isoformat()
+        beforeDate = end_of_year.replace(year=curr_year).isoformat()
+        afterDate = start_of_year.replace(year=curr_year).isoformat()
     elif input_args.last_year:
         # We want to look at last year
-        beforeDate = end_of_year.replace(year=current_date.year-1).isoformat()
-        afterDate = start_of_year.replace(year=current_date.year-1).isoformat()
+        beforeDate = end_of_year.replace(year=curr_year-1).isoformat()
+        afterDate = start_of_year.replace(year=curr_year-1).isoformat()
     else:
+        # We return just the current date, shouldn't get here TODO: Return error message instead?
         beforeDate = current_date.isoformat()
         afterDate = current_date.isoformat()
     return [afterDate, beforeDate]
