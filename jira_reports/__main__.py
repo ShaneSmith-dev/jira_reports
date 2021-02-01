@@ -9,16 +9,13 @@ import urllib3 # Used to disable warning
 from jira import JIRA # Python library to interface with JIRA REST api
 from collections import Counter # Used to count dictionary items 
 import argparse # Used to parse input arguments
-import time # Not sure if I need this one
-import datetime # Used to work with dates and times
-from datetime import timedelta # Used to adjust dates as needed
 
 from .config import load_config
+from .timeframe import report_dates
 
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning) # ignore warning about not doing certificate check
 
 if __name__ == "__main__":
-    current_date = datetime.date.today()
     parser = argparse.ArgumentParser()
 
     parser.add_argument(
@@ -59,19 +56,9 @@ if __name__ == "__main__":
     )
 
     args = parser.parse_args()
-
-    # TODO: pull this into its own function
-    if args.current_week:
-        # We want to look at the current week
-        if current_date.weekday() == 0:
-            afterDate = current_date.isoformat()
-        else:
-            date_adj = timedelta(days=current_date.weekday())
-            adj_date = current_date - date_adj
-            afterDate = adj_date.isoformat()
-        date_adj = timedelta(days=6-current_date.weekday())
-        adj_date = current_date + date_adj
-        beforeDate = adj_date.isoformat()
+    print(args)
+    report_times = report_dates(args)
+    print(report_times)
 
     # Load configurations from file
     config = load_config()
