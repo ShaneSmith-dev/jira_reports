@@ -17,12 +17,11 @@ Datetime Weekday Returns:
 6 = Sunday
 """
 
+current_date = datetime.date.today()
 start_of_year = datetime.date(2020,1,1)
 end_of_year = datetime.date(2020,12,31)
 
-def report_dates(input_args): # TODO: Add unit tests for this
-    # Grab current date
-    current_date = datetime.date.today()
+def report_dates(input_args,current_date):
     curr_year = current_date.year
     curr_month = current_date.month
 
