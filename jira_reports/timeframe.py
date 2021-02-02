@@ -17,7 +17,6 @@ Datetime Weekday Returns:
 6 = Sunday
 """
 
-current_date = datetime.date.today()
 start_of_year = datetime.date(2020,1,1)
 end_of_year = datetime.date(2020,12,31)
 
