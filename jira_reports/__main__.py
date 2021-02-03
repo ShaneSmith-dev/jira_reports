@@ -19,7 +19,7 @@ urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning) # ignore war
 if __name__ == "__main__":
     current_date = datetime.date.today()
     parser = argparse.ArgumentParser()
-
+    # TODO: Use groups to simplify logic here
     parser.add_argument(
         "-current-week",
         action = "store_true",
