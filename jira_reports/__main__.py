@@ -20,57 +20,51 @@ if __name__ == "__main__":
     current_date = datetime.date.today()
     parser = argparse.ArgumentParser()
     # TODO: Use groups to simplify logic here
-    parser.add_argument(
+    daterange = parser.add_mutually_exclusive_group()
+    daterange.add_argument(
         "-current-week",
         action = "store_true",
-        default = False,
         help = """Builds a report based on the current week.""",
     )
-    parser.add_argument(
+    daterange.add_argument(
         "-last-week",
         action = "store_true",
-        default = False,
         help = """Builds a report based on last week.""",
     )
-    parser.add_argument(
+    daterange.add_argument(
         "-current-month",
         action = "store_true",
-        default = False,
         help = """Builds a report based on the current month.""",
     )
-    parser.add_argument(
+    daterange.add_argument(
         "-last-month",
         action = "store_true",
-        default = False,
         help = """Builds a report based on last month.""",
     )
-    parser.add_argument(
+    daterange.add_argument(
         "-current-year",
         action = "store_true",
-        default = False,
         help = """Builds a report based on the current year.""",
     )
-    parser.add_argument(
+    daterange.add_argument(
         "-last-year",
         action = "store_true",
-        default = False,
         help = """Builds a report based on last year.""",
     )
-    parser.add_argument(
+    report_type = parser.add_mutually_exclusive_group()
+    report_type.add_argument(
         "-worklogs",
         action = "store_true",
-        default = False,
         help = """Looks at work logged by the user(s) in the provided timeframe.""",
     )
-    parser.add_argument(
+    report_type.add_argument(
         "-resolved",
         action = "store_true",
-        default = False,
         help = """Looks at issues resolved by the user(s) in the provided timeframe.""",
     )
 
     args = parser.parse_args()
-    print(args)
+    print(vars(args))
     report_times = report_dates(args,current_date)
     print(report_times)
 
