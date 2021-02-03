@@ -53,9 +53,14 @@ def report_dates(input_args,current_date):
         beforeDate = current_date.replace(day=calendar.monthrange(curr_year,curr_month)[1]).isoformat()
         afterDate = current_date.replace(day=1).isoformat()
     elif input_args.last_month:
-        # We want to look at last month TODO: Currently breaks in January (has to be in range 1-12)
-        beforeDate = current_date.replace(month=curr_month-1,day=calendar.monthrange(curr_year,curr_month-1)[1]).isoformat()
-        afterDate = current_date.replace(month=curr_month-1,day=1).isoformat()
+        # We want to look at last month
+        month_adj = curr_month - 1
+        year_adj = curr_year
+        if (month_adj < 1):
+            month_adj = 12
+            year_adj = curr_year - 1
+        beforeDate = current_date.replace(year=year_adj,month=month_adj,day=calendar.monthrange(curr_year,month_adj)[1]).isoformat()
+        afterDate = current_date.replace(year=year_adj,month=month_adj,day=1).isoformat()
     elif input_args.current_year:
         # We want to look at the current year
         beforeDate = end_of_year.replace(year=curr_year).isoformat()
