@@ -8,6 +8,8 @@ from jira_reports.timeframe import report_dates
 birth_date = datetime.date(1974,8,14)
 freeze_date = datetime.date(1999,12,31)
 start_of_year = datetime.date(2021,1,1)
+# TODO: Add short month
+# TODO: Add leapyear
 
 class testArgs():
     def __init__(self,cw,lw,cm,lm,cy,ly):
