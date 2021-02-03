@@ -20,11 +20,11 @@ Datetime Weekday Returns:
 start_of_year = datetime.date(2020,1,1)
 end_of_year = datetime.date(2020,12,31)
 
-def report_dates(input_args,current_date):
+def report_dates(date_range,current_date):
     curr_year = current_date.year
     curr_month = current_date.month
 
-    if input_args.current_week:
+    if date_range == "current_week":
         # We want to look at the current week
         if current_date.weekday() == 0:
             afterDate = current_date.isoformat()
@@ -35,7 +35,7 @@ def report_dates(input_args,current_date):
         date_adj = timedelta(days=6-current_date.weekday())
         adj_date = current_date + date_adj
         beforeDate = adj_date.isoformat()
-    elif input_args.last_week:
+    elif date_range == "last_week":
         # We want to look at last week
         date_adj = timedelta(days=7)
         last_date = current_date - date_adj
@@ -48,11 +48,11 @@ def report_dates(input_args,current_date):
         date_adj = timedelta(days=6-last_date.weekday())
         adj_date = last_date + date_adj
         beforeDate = adj_date.isoformat()
-    elif input_args.current_month:
+    elif date_range == "current_month":
         # We want to look at the current month
         beforeDate = current_date.replace(day=calendar.monthrange(curr_year,curr_month)[1]).isoformat()
         afterDate = current_date.replace(day=1).isoformat()
-    elif input_args.last_month:
+    elif date_range == "last_month":
         # We want to look at last month
         month_adj = curr_month - 1
         year_adj = curr_year
@@ -61,11 +61,11 @@ def report_dates(input_args,current_date):
             year_adj = curr_year - 1
         beforeDate = current_date.replace(year=year_adj,month=month_adj,day=calendar.monthrange(curr_year,month_adj)[1]).isoformat()
         afterDate = current_date.replace(year=year_adj,month=month_adj,day=1).isoformat()
-    elif input_args.current_year:
+    elif date_range == "current_year":
         # We want to look at the current year
         beforeDate = end_of_year.replace(year=curr_year).isoformat()
         afterDate = start_of_year.replace(year=curr_year).isoformat()
-    elif input_args.last_year:
+    elif date_range == "last_year":
         # We want to look at last year
         beforeDate = end_of_year.replace(year=curr_year-1).isoformat()
         afterDate = start_of_year.replace(year=curr_year-1).isoformat()

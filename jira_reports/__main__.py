@@ -35,7 +35,7 @@ if __name__ == "__main__":
     )
 
     args = parser.parse_args()
-    # report_times = report_dates(args,current_date)
+    report_times = report_dates(args.date_range,current_date)
 
     # Load configurations from file
     config = load_config()
