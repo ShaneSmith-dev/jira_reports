@@ -56,6 +56,18 @@ if __name__ == "__main__":
         default = False,
         help = """Builds a report based on last year.""",
     )
+    parser.add_argument(
+        "-worklogs",
+        action = "store_true",
+        default = False,
+        help = """Looks at work logged by the user(s) in the provided timeframe.""",
+    )
+    parser.add_argument(
+        "-resolved",
+        action = "store_true",
+        default = False,
+        help = """Looks at issues resolved by the user(s) in the provided timeframe.""",
+    )
 
     args = parser.parse_args()
     print(args)
