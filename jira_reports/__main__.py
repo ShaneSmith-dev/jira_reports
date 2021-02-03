@@ -13,6 +13,7 @@ import argparse # Used to parse input arguments
 
 from .config import load_config
 from .timeframe import report_dates
+from .report_types import ReportType
 
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning) # ignore warning about not doing certificate check
 
@@ -20,51 +21,21 @@ if __name__ == "__main__":
     current_date = datetime.date.today()
     parser = argparse.ArgumentParser()
     # TODO: Use groups to simplify logic here
-    daterange = parser.add_mutually_exclusive_group()
-    daterange.add_argument(
-        "-current-week",
-        action = "store_true",
-        help = """Builds a report based on the current week.""",
+    parser.add_argument(
+        "-date-range",
+        choices = ['current_week','last_week',
+        'current_month','last_month',
+        'current_year','last_year'],
+        help = """Builds a report based on the time range entered.""",
     )
-    daterange.add_argument(
-        "-last-week",
-        action = "store_true",
-        help = """Builds a report based on last week.""",
-    )
-    daterange.add_argument(
-        "-current-month",
-        action = "store_true",
-        help = """Builds a report based on the current month.""",
-    )
-    daterange.add_argument(
-        "-last-month",
-        action = "store_true",
-        help = """Builds a report based on last month.""",
-    )
-    daterange.add_argument(
-        "-current-year",
-        action = "store_true",
-        help = """Builds a report based on the current year.""",
-    )
-    daterange.add_argument(
-        "-last-year",
-        action = "store_true",
-        help = """Builds a report based on last year.""",
-    )
-    report_type = parser.add_mutually_exclusive_group()
-    report_type.add_argument(
-        "-worklogs",
-        action = "store_true",
+    parser.add_argument(
+        "-report-type",
+        choices = ['worklogs','resolved'],
         help = """Looks at work logged by the user(s) in the provided timeframe.""",
-    )
-    report_type.add_argument(
-        "-resolved",
-        action = "store_true",
-        help = """Looks at issues resolved by the user(s) in the provided timeframe.""",
     )
 
     args = parser.parse_args()
-    report_times = report_dates(args,current_date)
+    # report_times = report_dates(args,current_date)
 
     # Load configurations from file
     config = load_config()
