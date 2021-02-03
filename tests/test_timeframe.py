@@ -65,3 +65,23 @@ def test_report_dates():
     case12 = report_dates(last_year, freeze_date)
     assert case12[0] == "1998-01-01"
     assert case12[1] == "1998-12-31"
+
+    # Start of Year
+    case13 = report_dates(curr_week, start_of_year)
+    assert case13[0] == "2020-12-28"
+    assert case13[1] == "2021-01-03"
+    case14 = report_dates(last_week, start_of_year)
+    assert case14[0] == "2020-12-21"
+    assert case14[1] == "2020-12-27"
+    case15 = report_dates(curr_month, start_of_year)
+    assert case15[0] == "2021-01-01"
+    assert case15[1] == "2021-01-31"
+    case16 = report_dates(last_month, start_of_year)
+    assert case16[0] == "2020-12-01"
+    assert case16[1] == "2020-12-31"
+    case17 = report_dates(curr_year, start_of_year)
+    assert case17[0] == "2021-01-01"
+    assert case17[1] == "2021-12-31"
+    case18 = report_dates(last_year, start_of_year)
+    assert case18[0] == "2020-01-01"
+    assert case18[1] == "2020-12-31"
