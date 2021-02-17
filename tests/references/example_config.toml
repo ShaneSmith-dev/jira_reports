@@ -1,0 +1,18 @@
+title = "Test Configuration"
+
+[owner]
+name = "Phillip J. Fry"
+email = "pjfry@planetexpress.com"
+
+[server]
+base_uri = "https://jira.atlassian.com"
+api_uri = "https://jira.atlassian.com/rest/api/2"
+
+[users]
+myself = "pjfry"
+ship_crew = ["amywong", "bender", "pjfry", "turleela", "zoidberg"]
+employees = ["herconrad", "professor", "scruffy"]
+
+[custom_fields]
+project_key = "project.key"
+category = "project.projectCategory.name"
